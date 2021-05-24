@@ -1,9 +1,5 @@
 package com.openshift.fordevelopers;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Set;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,24 +14,24 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PostResource {
-  private Set<Post> lastPosts = Collections.newSetFromMap(Collections.synchronizedMap(new LinkedHashMap<>()));
 
   public PostResource() {
   }
 
   @GET
   public Response list() {
-    return Response.ok(lastPosts).build();
+    return Response.ok(Post.listAll()).build();
   }
 
   @POST
   public Response add(Post post) {
-    lastPosts.add(post);
-    return Response.ok().build();
+    post.persist();
+    return Response.ok(Post.listAll()).build();
   }
 
   @DELETE
   public Response delete(Post post) {
+    post.delete();;
     return Response.ok().build();
   }
 }

@@ -3,13 +3,12 @@ package com.openshift.fordevelopers;
 import java.util.Date;
 import java.util.Objects;
 
-import io.quarkus.mongodb.panache.MongoEntity;
-import io.quarkus.mongodb.panache.PanacheMongoEntity;
-import io.quarkus.runtime.annotations.RegisterForReflection;
+import javax.persistence.Entity;
 
-@RegisterForReflection
-@MongoEntity(collection = "Posts")
-public class Post extends PanacheMongoEntity {
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
+@Entity
+public class Post extends PanacheEntity {
     private String title;
     private String content;
     private long timestamp;
@@ -30,6 +29,7 @@ public class Post extends PanacheMongoEntity {
     public String getContent() {
         return content;
     }
+
     public Long getTimestamp() {
         return timestamp;
     }

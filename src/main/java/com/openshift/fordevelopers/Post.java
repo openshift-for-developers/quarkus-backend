@@ -24,11 +24,11 @@ public class Post extends PanacheMongoEntity {
     }
 
     public String getTitle() {
-        return title+"isitdone";
+        return new StringBuilder(title).reverse().toString();
     }
 
     public String getContent() {
-        return content;
+        return new StringBuilder(content).reverse().toString();
     }
     public Long getTimestamp() {
         return timestamp;
